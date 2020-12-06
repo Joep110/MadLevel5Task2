@@ -9,4 +9,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hintTitle">Title</string>
+    <string name="hintPlatform">Platform</string>
+    <string name="hintDay">Day</string>
+    <string name="hintMonth">Month</string>
+    <string name="hintYear">Year</string>
+    <string name="delete_all">Verwijder alle games</string>
 </resources>

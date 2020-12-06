@@ -38,14 +38,12 @@ class MainActivity : AppCompatActivity() {
                 supportActionBar?.setDisplayShowHomeEnabled(true)
                 supportActionBar?.title = "Add Game"
                 fabAddGame.hide()
-                fabSaveGame.show()
             } else {
                 menu.findItem(R.id.btnDeleteAllGames).isVisible = true
                 supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 supportActionBar?.setDisplayShowHomeEnabled(false)
                 supportActionBar?.title = "Game Backlog"
                 fabAddGame.show()
-                fabSaveGame.hide()
             }
         }
         return true

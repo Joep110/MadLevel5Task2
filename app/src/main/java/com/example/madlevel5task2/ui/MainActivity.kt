@@ -1,5 +1,6 @@
 package com.example.madlevel5task2.ui
 
+import android.os.Build
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.madlevel5task2.R
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -59,10 +62,14 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun saveGame() {
-        val date = Date(txtAddYear.text.toString().toInt(), txtAddMonth.text.toString().toInt(), txtAddDay.text.toString().toInt())
-        viewModel.insertGame(txtAddTitle.text.toString(), txtAddPlatform.text.toString(), date)
-        println("test")
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.YEAR, txtAddYear.text.toString().toInt())
+        cal.set(Calendar.MONTH, txtAddMonth.text.toString().toInt())
+        cal.set(Calendar.DAY_OF_MONTH, txtAddDay.text.toString().toInt())
+
+        viewModel.insertGame(txtAddTitle.text.toString(), txtAddPlatform.text.toString(), Date.from(cal.toInstant()))
         navController.navigate(R.id.action_SecondFragment_to_FirstFragment)
     }
 

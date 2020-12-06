@@ -41,6 +41,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun deleteGame(id: Int) {
+        MainScope().launch {
+            withContext(Dispatchers.IO) {
+                gameRepository.deleteGame(id)
+            }
+        }
+    }
+
     private fun isGameValid(game: Game): Boolean {
         return when {
             game.title.isBlank() -> {

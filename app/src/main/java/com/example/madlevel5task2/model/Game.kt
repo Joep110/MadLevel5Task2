@@ -11,5 +11,5 @@ class Game (
     @ColumnInfo(name = "platform") var platform: String,
     @ColumnInfo(name = "releaseDate") var releaseDate: Date,
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") var noteId: Long? = null
+    @ColumnInfo(name = "id") var id: Long? = null
 )

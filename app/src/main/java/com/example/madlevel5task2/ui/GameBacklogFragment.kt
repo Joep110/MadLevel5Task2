@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel5task2.R
 import com.example.madlevel5task2.model.Game
 import com.google.android.material.snackbar.Snackbar
@@ -54,8 +56,33 @@ class GameBacklogFragment : Fragment() {
         gameBacklogAdapter = GameBacklogAdapter(games)
         rvBacklogScreen.adapter = gameBacklogAdapter
         rvBacklogScreen.layoutManager = GridLayoutManager(context, 1)
+        itemTouchHelper().attachToRecyclerView(rvBacklogScreen)
         observeAddGameBacklog()
         observeDeleteGameBacklog()
+    }
+
+    private fun itemTouchHelper(): ItemTouchHelper {
+        val itemTouchHelperCallback =
+            object :
+                ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    return false
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    val position = viewHolder.adapterPosition
+                    viewModel.deleteGame(position)
+                    games.removeAt(position)
+                    gameBacklogAdapter.notifyDataSetChanged()
+                }
+
+            }
+
+        return ItemTouchHelper(itemTouchHelperCallback)
     }
 
     private fun observeAddGameBacklog() {

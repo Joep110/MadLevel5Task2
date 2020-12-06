@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.madlevel5task2.R
 import com.example.madlevel5task2.model.Game
 import kotlinx.android.synthetic.main.item_card_game_backlog.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class GameBacklogAdapter(private val games: List<Game>) : RecyclerView.Adapter<GameBacklogAdapter.ViewHolder>() {
 
@@ -15,7 +17,10 @@ class GameBacklogAdapter(private val games: List<Game>) : RecyclerView.Adapter<G
         fun databind(game: Game) {
             itemView.txtViewGameTitle.text = game.title
             itemView.txtViewPlatformTitle.text = game.platform
-            itemView.txtViewReleaseDate.text = game.releaseDate.toString()
+
+            val format = SimpleDateFormat("dd MMMM yyy")
+
+            itemView.txtViewReleaseDate.text = "Release: " + format.format(game.releaseDate)
         }
     }
 

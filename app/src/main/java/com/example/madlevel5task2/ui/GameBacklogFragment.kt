@@ -1,22 +1,16 @@
 package com.example.madlevel5task2.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.Button
-import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.madlevel5task2.R
 import com.example.madlevel5task2.model.Game
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_game_backlog.*
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -27,6 +21,11 @@ class GameBacklogFragment : Fragment() {
     private lateinit var gameBacklogAdapter: GameBacklogAdapter
 
     private val viewModel: GameViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +39,15 @@ class GameBacklogFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.btnDeleteAllGames -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun initViews() {

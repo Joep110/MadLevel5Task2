@@ -5,10 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.madlevel5task2.model.Game
 import com.example.madlevel5task2.repository.GameRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.util.*
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
@@ -32,6 +29,14 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     gameRepository.insertGame(newGame)
                 }
                 success.value = true
+            }
+        }
+    }
+
+    fun deleteGames() {
+        MainScope().launch {
+            withContext(Dispatchers.IO) {
+                gameRepository.deleteGames()
             }
         }
     }

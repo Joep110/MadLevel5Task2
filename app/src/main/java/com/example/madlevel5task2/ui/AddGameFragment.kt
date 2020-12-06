@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.madlevel5task2.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,7 +22,6 @@ import java.util.*
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class AddGameFragment : Fragment() {
-
     private val viewModel: GameViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,15 +38,6 @@ class AddGameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fabSaveGame.setOnClickListener {
-            saveGame()
-        }
     }
 
-    private fun saveGame() {
-        val date = Date(txtAddYear.text.toString().toInt(), txtAddMonth.text.toString().toInt(), txtAddDay.text.toString().toInt())
-        viewModel.insertGame(txtAddTitle.text.toString(), txtAddPlatform.text.toString(), date)
-
-
-    }
 }

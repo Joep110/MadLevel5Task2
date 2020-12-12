@@ -41,10 +41,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteGame(id: Int) {
+    fun deleteGame(game: Game) {
         MainScope().launch {
             withContext(Dispatchers.IO) {
-                gameRepository.deleteGame(id)
+                gameRepository.deleteGame(game)
             }
         }
     }

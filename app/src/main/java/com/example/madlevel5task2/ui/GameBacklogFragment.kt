@@ -75,7 +75,8 @@ class GameBacklogFragment : Fragment() {
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val position = viewHolder.adapterPosition
-                    viewModel.deleteGame(position)
+                    val game = games[position]
+                    viewModel.deleteGame(game)
                     games.removeAt(position)
                     gameBacklogAdapter.notifyDataSetChanged()
                 }

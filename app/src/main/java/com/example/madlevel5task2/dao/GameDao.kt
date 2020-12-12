@@ -2,6 +2,7 @@ package com.example.madlevel5task2.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.madlevel5task2.model.Game
@@ -15,8 +16,8 @@ interface GameDao {
     @Query("SELECT * FROM gameTable ORDER BY releaseDate ASC")
     fun getAllGames(): LiveData<List<Game>>
 
-    @Query("DELETE FROM gameTable WHERE id = :id")
-    suspend fun deleteGame(id: Int)
+    @Delete
+    suspend fun deleteGame(game: Game)
 
     @Query("DELETE FROM gameTable")
     suspend fun deleteGames()
